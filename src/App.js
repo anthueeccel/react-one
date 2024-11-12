@@ -1,5 +1,6 @@
-import { ProductCard } from './components/ProductCard';
-import { ProductList } from './components/ProductList';
+import { Fragment } from "react";
+import { ProductCard } from "./components/ProductCard";
+import { ProductList } from "./components/ProductList";
 import './App.css';
 
 function App() {
@@ -49,21 +50,23 @@ function App() {
       <ProductList>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} onPurchase={handlePurchase} />
-          ))
-        }        
+        ))
+        }
       </ProductList>
 
       <h2>Product which cost up to $500</h2>
-      <ul>
-        {products
-          .filter(({price}) => price < 500)
-          .map(({ title, price }) => (
-        <li>
-          {title} cost ${price}
-        </li>
-      ))}
-      </ul>
+      {products
+        .filter(({ price }) => price < 500)
+        .map(({ title, price, id }) => (
+          <Fragment key={id}>
+            <hr style={{ borderColor: "slategray"}}/>
+            <p>
+              {title} cost ${price}
+            </p>
+          </Fragment>
 
+        ))}
+      <hr style={{ borderColor: "slategray"}}/>
     </div>
   );
 }
