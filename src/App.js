@@ -16,6 +16,7 @@ function App() {
         "Up to 29 hours video playback",
       ],
       price: 999,
+      stockCount: 6
     },
     {
       id: "f058a8d1-03cc-45d4-9875-ad3660d1bc27",
@@ -27,6 +28,7 @@ function App() {
         "Up to 29 hours video playback",
       ],
       price: 349,
+      stockCount: 10
     },
     {
       id: "f6e12653-89bd-448d-b452-2bef30bf864f",
@@ -38,6 +40,7 @@ function App() {
         "Up to 29 hours video playback",
       ],
       price: 249,
+      stockCount: 0
     }
   ];
 
