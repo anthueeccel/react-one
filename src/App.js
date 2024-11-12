@@ -6,6 +6,7 @@ function App() {
 
   const products = [
     {
+      id: "d9abf2cf-8099-4177-b399-49edfa31cb21",
       imageSrc: "images/phone16pro_x.png",
       title: "Phone 16 Pro X",
       specification: [
@@ -16,6 +17,7 @@ function App() {
       price: 999,
     },
     {
+      id: "f058a8d1-03cc-45d4-9875-ad3660d1bc27",
       imageSrc: "images/smartwatch_x.png",
       title: "Smartwath 16 X",
       specification: [
@@ -26,6 +28,7 @@ function App() {
       price: 349,
     },
     {
+      id: "f6e12653-89bd-448d-b452-2bef30bf864f",
       imageSrc: "images/podspro_x.png",
       title: "Pods Pro X",
       specification: [
@@ -44,10 +47,23 @@ function App() {
   return (
     <div className="App">
       <ProductList>
-        <ProductCard width="128px" height="128px" background="darkolivegreen" product={products[0]} onPurchase={handlePurchase} />
-        <ProductCard width="96px" height="96px" product={products[1]} onPurchase={handlePurchase} />
-        <ProductCard width="64px" height="64px" background="peru" product={products[2]} onPurchase={handlePurchase} />
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} onPurchase={handlePurchase} />
+          ))
+        }        
       </ProductList>
+
+      <h2>Product which cost up to $500</h2>
+      <ul>
+        {products
+          .filter(({price}) => price < 500)
+          .map(({ title, price }) => (
+        <li>
+          {title} cost ${price}
+        </li>
+      ))}
+      </ul>
+
     </div>
   );
 }

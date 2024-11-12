@@ -23,13 +23,14 @@ export function ProductCard({
             <img
                 src={product.imageSrc}
                 alt={product.title}
-                {...restProps}
+                width={128}
+                height={128}
             />
             <p>Specification:</p>
-            <ul style={{ listStyle: 'none', padding: 'none' }}>
-                <li>{product.specification[0]}</li>
-                <li>{product.specification[1]}</li>
-                <li>{product.specification[2]}</li>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+                {product.specification.map((spec, index) => (
+                    <li key={index}>{spec}</li>
+                ))}
             </ul>
             <button onClick={() => onPurchase(product)}>
                 Buy (From ${getProductPrice(product.price)})
