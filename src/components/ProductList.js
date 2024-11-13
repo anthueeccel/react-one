@@ -1,8 +1,16 @@
+const styles = {
+    List: { 
+        display: "flex", 
+        gap: "16px",
+        marginBotton: "36px",
+     }
+};
+
 export function ProductList(props) {
     return(
     <div>
         <h2>Produtcs</h2>
-        <div style={{ display: "flex", gap: "16px" }}>{props.children}</div>
+        <div style={styles.List}>{props.children}</div>
     </div>
     );
 }

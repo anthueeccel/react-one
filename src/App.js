@@ -3,6 +3,16 @@ import { ProductCard } from "./components/ProductCard";
 import { ProductList } from "./components/ProductList";
 import './App.css';
 
+const styles = {
+  ListDivider: {
+    borderColor: "slategray"
+  },
+  ListTitle: {
+    margin: "8px 0"
+  },
+};
+
+
 function App() {
 
   const products = [
@@ -62,14 +72,14 @@ function App() {
         .filter(({ price }) => price < 500)
         .map(({ title, price, id }) => (
           <Fragment key={id}>
-            <hr style={{ borderColor: "slategray"}}/>
-            <p>
+            <hr style={styles.ListDivider}/>
+            <p style={styles.ListTitle}>
               {title} cost ${price}
             </p>
           </Fragment>
 
         ))}
-      <hr style={{ borderColor: "slategray"}}/>
+      <hr style={styles.ListDivider}/>
     </div>
   );
 }
