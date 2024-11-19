@@ -1,17 +1,7 @@
 import { Fragment } from "react";
 import { ProductCard } from "./components/ProductCard";
 import { ProductList } from "./components/ProductList";
-import './App.css';
-
-const styles = {
-  ListDivider: {
-    borderColor: "slategray"
-  },
-  ListTitle: {
-    margin: "8px 0"
-  },
-};
-
+import styles from "./App.css";
 
 function App() {
 
@@ -59,7 +49,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className={styles.App}>
       <ProductList>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} onPurchase={handlePurchase} />
@@ -72,8 +62,8 @@ function App() {
         .filter(({ price }) => price < 500)
         .map(({ title, price, id }) => (
           <Fragment key={id}>
-            <hr style={styles.ListDivider}/>
-            <p style={styles.ListTitle}>
+            <hr className={styles.ListDivider} />
+            <p className={styles.ListTitle}>
               {title} cost ${price}
             </p>
           </Fragment>
