@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Fragment } from "react";
-import { ProductCard } from "./components/ProductCard";
 import { ProductList } from "./components/ProductList";
+import { ProductCard } from "./components/ProductCard";
+import { ProductFilter } from "./components/ProductFilter";
 import styles from "./App.css";
 
 function App() {
@@ -44,34 +46,72 @@ function App() {
     }
   ];
 
+  const [filters, setFilters] = useState({
+    price: {
+      min: 0,
+      max: 999,
+    },
+    other: "other value",
+  });
+
+  const [favorites, setFavorites] = useState([]);
+
   function handlePurchase(product) {
     alert(`You clicked on ${product.title} which cost $${product.price}`)
+  }
+
+  function handleFilter(key, value) {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      price: {
+        ...prevFilters.price,
+        [key]: value,
+      },
+    }));
+  }
+
+  function handleFavorite(productId) {
+    if (favorites.includes(productId)) {
+      setFavorites((prevFavotites) =>
+        prevFavotites.filter((id) => id !== productId)
+      );
+    } else {
+      setFavorites((prevFavorites) => [...prevFavorites, productId])
+    }
   }
 
   return (
     <div className={styles.App}>
       <ProductList>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} onPurchase={handlePurchase} />
-        ))
-        }
+          <ProductCard
+            key={product.id}
+            product={product}
+            isFavorite={favorites.includes(product.id)}
+            onPurchase={handlePurchase}
+            onFavorite={handleFavorite}
+          />
+        ))}
       </ProductList>
 
-      <h2>Product which cost up to $500</h2>
+      <h2>Product filter by price</h2>
+      <ProductFilter filters={filters} onFilter={handleFilter} />
       {products
-        .filter(({ price }) => price < 500)
-        .map(({ title, price, id }) => (
-          <Fragment key={id}>
+        .filter(
+          ({ price }) =>
+            price >= filters.price.min && price <= filters.price.max
+        )
+        .map(({ title, price }) => (
+          <Fragment key={title}>
             <hr className={styles.ListDivider} />
             <p className={styles.ListTitle}>
               {title} cost ${price}
             </p>
           </Fragment>
-
         ))}
-      <hr style={styles.ListDivider}/>
     </div>
   );
 }
+
 
 export default App;
